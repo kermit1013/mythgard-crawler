@@ -12,6 +12,7 @@ cd mythgard-crawler
 install dependencies and run
 
 ```
+mkdir cards
 npm install
 node index.js
 ```

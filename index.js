@@ -10,7 +10,7 @@ var driver = new webdriver.Builder()
   .withCapabilities(webdriver.Capabilities.chrome())
   .build();
 
-var linkArr = [];
+var imageLinkArr = [];
 var pageSource = "";
 //promise
 var getLinks = new Promise(async function (resolve, reject) {
@@ -37,9 +37,9 @@ var getLinks = new Promise(async function (resolve, reject) {
     console.log(imageLinkArr);
   })
   .then(() => {
-    console.log('===download===');
+    console.log('===download start===');
     downloadFile();
-    console.log('===quit!===');
+    console.log('===browse quit ... waiting for reading===');
     driver.quit();
   });
 
@@ -50,10 +50,9 @@ var downloadFile = () => {
 }
 // call back function
 var readFile = function (callback) {
-  if (linkArr.length > 0) {
-    var link = linkArr.shift();
+  if (imageLinkArr.length > 0) {
+    var link = imageLinkArr.shift();
     var fileName = link.split('/')[link.split('/').length - 1];
-    console.log(split[split.length - 1]);
     var file = fs.createWriteStream(`./cards/${fileName}`);
     https.get("https://mythdb.eu".concat(link), function (response) {
       response.pipe(file);
